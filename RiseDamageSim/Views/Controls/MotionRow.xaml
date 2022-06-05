@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="RiseDamageSim.Views.Controls.MotionRow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RiseDamageSim.Views.Controls" xmlns:controls="clr-namespace:RiseDamageSim.ViewModels.Controls" d:DataContext="{d:DesignInstance Type=controls:MotionRowViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="300">
+    <StackPanel Orientation="Horizontal">
+        <TextBlock Width="125" Text="{Binding Name.Value, Mode=OneWay}"></TextBlock>
+        <TextBox Width="25" Text="{Binding Frequency.Value}"/>
+        <TextBlock Width="25" Text="{Binding MotionValue.Value, Mode=OneWay}"></TextBlock>
+        <TextBlock Width="25" Text="{Binding PhysicsElementName.Value, Mode=OneWay}"></TextBlock>
+        <TextBlock Width="25" Text="{Binding SharpnessModifier.Value, Mode=OneWay}"></TextBlock>
+        <TextBlock Width="25" Text="{Binding ElementModifier.Value, Mode=OneWay}"></TextBlock>
+        <TextBlock Width="25" Text="{Binding IsSilkbind.Value, Mode=OneWay}"></TextBlock>
+        <TextBox Width="25" Text="{Binding PunishingDrawProbability.Value}"/>
+        <TextBox Width="25" Text="{Binding CriticalDrawProbability.Value}"/>
+    </StackPanel>
+</UserControl>

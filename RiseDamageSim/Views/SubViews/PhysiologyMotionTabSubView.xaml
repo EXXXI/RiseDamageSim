@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="RiseDamageSim.Views.SubViews.PhysiologyMotionTabSubView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RiseDamageSim.Views.SubViews" xmlns:controls="clr-namespace:RiseDamageSim.Views.Controls" xmlns:subviews="clr-namespace:RiseDamageSim.ViewModels.SubViews" d:DataContext="{d:DesignInstance Type=subviews:PhysiologyMotionTabSubViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="850">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock>肉質設定</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>モンスター</TextBlock>
+                    <ComboBox Width="150" ItemsSource="{Binding Monsters.Value, Mode=OneWay}" SelectedItem="{Binding SelectedMonster.Value}"/>
+                    <TextBlock>怒り倍率</TextBlock>
+                    <TextBox Width="30" Text="{Binding RageModifier.Value}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding IsAerial.Value}">空棲系</CheckBox>
+                    <CheckBox IsChecked="{Binding IsAquatic.Value}">水棲系</CheckBox>
+                    <CheckBox IsChecked="{Binding IsWyvern.Value}">竜種</CheckBox>
+                    <CheckBox IsChecked="{Binding IsSmall.Value}">小型</CheckBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="130">肉質名</TextBlock>
+                    <TextBlock Width="25">比率</TextBlock>
+                    <TextBlock Width="25">斬</TextBlock>
+                    <TextBlock Width="25">打</TextBlock>
+                    <TextBlock Width="25">弾</TextBlock>
+                    <TextBlock Width="25">火</TextBlock>
+                    <TextBlock Width="25">水</TextBlock>
+                    <TextBlock Width="25">雷</TextBlock>
+                    <TextBlock Width="25">氷</TextBlock>
+                    <TextBlock Width="25">龍</TextBlock>
+                    <TextBlock Width="25">気絶</TextBlock>
+                </StackPanel>
+
+
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding PhysiologyVMs.Value, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:PhysiologyRow/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Column="1">
+            <StackPanel>
+                <TextBlock>モーション設定</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="125">名前</TextBlock>
+                    <TextBlock Width="25">頻度</TextBlock>
+                    <TextBlock Width="25">値</TextBlock>
+                    <TextBlock Width="25">種類</TextBlock>
+                    <TextBlock Width="25">斬補</TextBlock>
+                    <TextBlock Width="25">属補</TextBlock>
+                    <TextBlock Width="25">蟲技</TextBlock>
+                    <TextBlock Width="25">抜力</TextBlock>
+                    <TextBlock Width="25">抜技</TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding MotionVMs.Value, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:MotionRow/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

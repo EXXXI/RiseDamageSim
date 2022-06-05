@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="RiseDamageSim.Views.SubViews.BattleStyleTabSubView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RiseDamageSim.Views.SubViews" xmlns:subviews="clr-namespace:RiseDamageSim.ViewModels.SubViews" d:DataContext="{d:DesignInstance Type=subviews:BattleStyleTabSubViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="850">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock>各種バフ等発動率設定</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">気炎の旋律</TextBlock>
+                <TextBox Width="25" Text="{Binding SongofRagingFlameProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">攻撃旋律</TextBlock>
+                <TextBox Width="25" Text="{Binding SongofAttackProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">会心旋律</TextBlock>
+                <TextBox Width="25" Text="{Binding SongofCriticalProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">属性旋律</TextBlock>
+                <TextBox Width="25" Text="{Binding SongofElementProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">力の護符</TextBlock>
+                <TextBox Width="25" Text="{Binding PowercharmProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">力の爪</TextBlock>
+                <TextBox Width="25" Text="{Binding PowertalonProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">鬼人薬</TextBlock>
+                <TextBox Width="25" Text="{Binding DemondrugProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">鬼人薬G</TextBlock>
+                <TextBox Width="25" Text="{Binding DemondrugGProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">怪力の種</TextBlock>
+                <TextBox Width="25" Text="{Binding MightSeedProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">ビルドアップ</TextBlock>
+                <TextBox Width="25" Text="{Binding BuildUpProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">ホムラチョウ</TextBlock>
+                <TextBox Width="25" Text="{Binding ButterflameProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">鬼人の粉塵</TextBlock>
+                <TextBox Width="25" Text="{Binding DemonPowderProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">鬼人弾</TextBlock>
+                <TextBox Width="25" Text="{Binding DemonAmmoProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">短期催眠術</TextBlock>
+                <TextBox Width="25" Text="{Binding FelyneBoosterProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">アミキリアカネ</TextBlock>
+                <TextBox Width="25" Text="{Binding CutterflyProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">シラヌイカ(4匹)</TextBlock>
+                <TextBox Width="25" Text="{Binding LampsquidProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">強化咆哮</TextBlock>
+                <TextBox Width="25" Text="{Binding RousingRoarProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">強化太鼓</TextBlock>
+                <TextBox Width="25" Text="{Binding PowerDrumProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">強化納刀</TextBlock>
+                <TextBox Width="25" Text="{Binding PowerSheatheProb.Value}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBlock>スキル条件達成率設定</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">フルチャージ</TextBlock>
+                <TextBox Width="25" Text="{Binding PeakPerformanceProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">龍気活性</TextBlock>
+                <TextBox Width="25" Text="{Binding DragonheartProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">逆襲</TextBlock>
+                <TextBox Width="25" Text="{Binding CounterstrikeProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">逆恨み</TextBlock>
+                <TextBox Width="25" Text="{Binding ResentmentProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">死中に活</TextBlock>
+                <TextBox Width="25" Text="{Binding ResuscitateProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">不屈(1)</TextBlock>
+                <TextBox Width="25" Text="{Binding FortifyProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">不屈(2)</TextBlock>
+                <TextBox Width="25" Text="{Binding Fortify2Prob.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">火事場力</TextBlock>
+                <TextBox Width="25" Text="{Binding HeroicsProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">おだんご火事場力</TextBlock>
+                <TextBox Width="25" Text="{Binding DangoAdrenalineProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">渾身</TextBlock>
+                <TextBox Width="25" Text="{Binding MaximumMightProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">力の開放</TextBlock>
+                <TextBox Width="25" Text="{Binding LatentPowerProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">滑走強化</TextBlock>
+                <TextBox Width="25" Text="{Binding AffinitySlidingProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">怨虎龍の魂</TextBlock>
+                <TextBox Width="25" Text="{Binding MagnamaloSoulProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">霞龍の魂(攻撃)</TextBlock>
+                <TextBox Width="25" Text="{Binding ChameleosSoulProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">鋼龍の魂(1-4)</TextBlock>
+                <TextBox Width="25" Text="{Binding KushalaDaoraSoulProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">鋼龍の魂(5)</TextBlock>
+                <TextBox Width="25" Text="{Binding KushalaDaoraSoul5Prob.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">壁面移動</TextBlock>
+                <TextBox Width="25" Text="{Binding WallRunnerProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">攻めの守勢</TextBlock>
+                <TextBox Width="25" Text="{Binding OffensiveGuardProb.Value}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <TextBlock>敵状態異常率設定</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">怒り</TextBlock>
+                <TextBox Width="25" Text="{Binding RageProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">火やられ</TextBlock>
+                <TextBox Width="25" Text="{Binding FireBlightProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">水やられ</TextBlock>
+                <TextBox Width="25" Text="{Binding WaterBlightProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">雷やられ</TextBlock>
+                <TextBox Width="25" Text="{Binding ThunderBlightProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">氷やられ</TextBlock>
+                <TextBox Width="25" Text="{Binding IceBlightProb.Value}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="3">
+            <TextBlock>行動設定</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">攻撃回数</TextBlock>
+                <TextBox Width="25" Text="{Binding AttackCount.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">紅ヒトダマドリ上昇量</TextBlock>
+                <TextBox Width="25" Text="{Binding Spiribirds.Value}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
