@@ -23,6 +23,9 @@ namespace RiseDamageSim.ViewModels.SubViews
         public ReactivePropertySlim<List<int>> SkillLvs { get; set; } = new();
         public ReactivePropertySlim<List<EquipmentRowViewModel>> EquipmentVMs { get; set; } = new();
         public ReactivePropertySlim<bool> ShowAllRampage { get; set; } = new(false);
+        public ReactivePropertySlim<List<CompareSet>> CompareSets { get; set; } = new();
+        public ReactivePropertySlim<CompareSet> SelectedSet { get; set; } = new();
+        public ReactivePropertySlim<string> SetName { get; set; } = new();
 
         #region スキルレベル
         /// <summary>
@@ -197,8 +200,10 @@ namespace RiseDamageSim.ViewModels.SubViews
         #endregion
 
         public ReactiveCommand AddEquipmentCommand { get; } = new ReactiveCommand();
-
         public ReactiveCommand UpdateEquipmentCommand { get; } = new ReactiveCommand();
+        public ReactiveCommand AddNewSetCommand { get; } = new ReactiveCommand();
+        public ReactiveCommand UpdateSetNameCommand { get; } = new ReactiveCommand();
+        public ReactiveCommand DeleteSetCommand { get; } = new ReactiveCommand();
 
 
         public EquipmentTabSubViewModel()
@@ -206,12 +211,17 @@ namespace RiseDamageSim.ViewModels.SubViews
             Weapons.Value = Masters.GreatSwords;
             SelectedWeapon.Value = Weapons.Value[0];
             SkillLvs.Value = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7 };
+            CompareSets.Value = Masters.CompareSets;
+            SelectedSet.Value = CompareSets.Value[0];
 
             ShowAllRampage.Subscribe(_ => SetRampageSkills());
             SelectedWeapon.Subscribe(_ => SetRampageSkills());
             AddEquipmentCommand.Subscribe(_ => SaveEquipment(false));
             UpdateEquipmentCommand.Subscribe(_ => SaveEquipment(true));
-            ShowEquipments();
+            SelectedSet.Subscribe(_ => ShowEquipments());
+            AddNewSetCommand.Subscribe(_ => SaveSet(false));
+            UpdateSetNameCommand.Subscribe(_ => SaveSet(true));
+            DeleteSetCommand.Subscribe(_ => DeleteSet());
         }
 
         private void SetRampageSkills()
@@ -253,7 +263,7 @@ namespace RiseDamageSim.ViewModels.SubViews
                     Id = Guid.NewGuid().ToString()
                 };
                 Id = equip.Id;
-                Masters.AddEquipment(equip);
+                Masters.AddEquipment(SelectedSet.Value, equip);
             }
             equip.Name = Name.Value;
             equip.Weapon = SelectedWeapon.Value;
@@ -295,7 +305,7 @@ namespace RiseDamageSim.ViewModels.SubViews
             equip.MindsEyeLv = MindsEyeLv.Value;
             equip.IbushiLv = IbushiLv.Value;
 
-            Masters.SaveEquipments();
+            Masters.SaveCompareSets();
             ShowEquipments();
 
         }
@@ -343,16 +353,69 @@ namespace RiseDamageSim.ViewModels.SubViews
             MindsEyeLv.Value = equip.MindsEyeLv;
             IbushiLv.Value= equip.IbushiLv;
         }
+
         internal void DeleteEquipment(Equipment original)
         {
-            Masters.DeleteEquipment(original);
+            Masters.DeleteEquipment(SelectedSet.Value, original);
+            ShowEquipments();
+        }
+
+        private void SaveSet(bool isUpdate)
+        {
+            CompareSet? set = null;
+            if (isUpdate)
+            {
+                set = Masters.GetSet(SelectedSet.Value);
+            }
+            if (set == null)
+            {
+                set = new CompareSet();
+                Masters.AddSet(set);
+            }
+            set.Name = SetName.Value;
+
+            Masters.SaveCompareSets();
+            List<CompareSet> list = new();
+            foreach (CompareSet masset in Masters.CompareSets)
+            {
+                list.Add(masset);
+            }
+            CompareSets.Value = list;
+            SelectedSet.Value = set;
+            ShowEquipments();
+        }
+
+
+
+        private void DeleteSet()
+        {
+            bool isDeleted = Masters.DeleteSet(SelectedSet.Value);
+
+            if (!isDeleted)
+            {
+                return;
+            }
+
+            Masters.SaveCompareSets();
+            List<CompareSet> list = new();
+            foreach (CompareSet masset in Masters.CompareSets)
+            {
+                list.Add(masset);
+            }
+            CompareSets.Value = list;
+            SelectedSet.Value = CompareSets.Value[0];
             ShowEquipments();
         }
 
         private void ShowEquipments()
         {
+            if (SelectedSet.Value == null)
+            {
+                SelectedSet.Value = CompareSets.Value[0];
+            }
+            SetName.Value = SelectedSet.Value.Name;
             List<EquipmentRowViewModel> vms = new();
-            foreach (var equip in Masters.Equipments)
+            foreach (var equip in SelectedSet.Value.Equipments)
             {
                 vms.Add(new EquipmentRowViewModel(equip));
             }

@@ -9,7 +9,7 @@ namespace RiseDamageSim.Model
     internal class CompareSet
     {
         public string Name { get; set; } = string.Empty;
-        public List<Equipment> Equipment { get; set; } = new();
+        public List<Equipment> Equipments { get; set; } = new();
 
         public override string ToString()
         {

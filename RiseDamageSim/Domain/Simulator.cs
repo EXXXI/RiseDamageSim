@@ -29,6 +29,7 @@ namespace RiseDamageSim.Domain
             {
                 results.Add(CalcDamage(equip));
             }
+            results.Sort(CompareFullDamage);
             return results;
         }
 
@@ -2677,7 +2678,20 @@ namespace RiseDamageSim.Domain
         }
 
 
-
-
+        private static int CompareFullDamage(CalcResult x, CalcResult y)
+        {
+            if (x.FullDamage < y.FullDamage)
+            {
+                return 1;
+            }
+            else if (x.FullDamage > y.FullDamage)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

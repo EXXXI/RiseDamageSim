@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RiseDamageSim.Views.SubViews" xmlns:controls="clr-namespace:RiseDamageSim.Views.Controls" xmlns:subviews="clr-namespace:RiseDamageSim.ViewModels.SubViews" d:DataContext="{d:DesignInstance Type=subviews:EquipmentTabSubViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="850">
+             d:DesignHeight="450" d:DesignWidth="860">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -183,14 +183,31 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <StackPanel Grid.Column="1">
-            <ItemsControl ItemsSource="{Binding EquipmentVMs.Value, Mode=OneWay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:EquipmentRow/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+        <ScrollViewer Grid.Column="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>比較セット選択：</TextBlock>
+                    <ComboBox Width="120" ItemsSource="{Binding CompareSets.Value, Mode=OneWay}" SelectedItem="{Binding SelectedSet.Value}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>比較セット名：</TextBlock>
+                    <TextBox Width="130" Text="{Binding SetName.Value}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding AddNewSetCommand}">新規作成</Button>
+                    <Button Command="{Binding UpdateSetNameCommand}">名前変更</Button>
+                    <Button Command="{Binding DeleteSetCommand}">削除</Button>
+                </StackPanel>
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding EquipmentVMs.Value, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:EquipmentRow/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

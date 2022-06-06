@@ -17,7 +17,7 @@ namespace RiseDamageSim.Model
         public static List<Monster> Monsters;
         public static List<Weapon> GreatSwords;
         public static List<Motion> GreatSwordMotion;
-        public static List<Equipment> Equipments;
+        public static List<CompareSet> CompareSets;
         public static List<string> RampageSkills;
 
         static Masters()
@@ -33,7 +33,7 @@ namespace RiseDamageSim.Model
             LoadWeaponDatas();
             SetRampageSkillsData();
             LoadMonsterDatas();
-            LoadEquipments();
+            LoadCompareSets();
         }
 
         private static void SetRampageSkillsData()
@@ -96,23 +96,22 @@ namespace RiseDamageSim.Model
             Monsters = monsters;
         }
 
-        private static void LoadEquipments()
+        private static void LoadCompareSets()
         {
-            string json = File.ReadAllText("save/Equipments.json");
-            List<Equipment>? equips = JsonSerializer.Deserialize<List<Equipment>>(json, options);
-            if (equips == null)
+            string json = File.ReadAllText("save/CompareSets.json");
+            List<CompareSet>? sets = JsonSerializer.Deserialize<List<CompareSet>>(json, options);
+            if (sets == null)
             {
-                throw new FileFormatException("save/Equipments.json");
+                throw new FileFormatException("save/CompareSets.json");
             }
-            Equipments = equips;
+            CompareSets = sets;
         }
 
-        public static void SaveEquipments()
+        public static void SaveCompareSets()
         {
-            string json = JsonSerializer.Serialize(Equipments, options);
-            File.WriteAllText("save/Equipments.json", json);
+            string json = JsonSerializer.Serialize(CompareSets, options);
+            File.WriteAllText("save/CompareSets.json", json);
         }
-
 
         public static Weapon? GetWeapon(string name)
         {
@@ -128,26 +127,53 @@ namespace RiseDamageSim.Model
 
         public static Equipment? GetEquipment(string id)
         {
-            foreach (var equip in Equipments)
+            foreach (var set in CompareSets)
             {
-                if (equip.Id == id)
+                foreach (var equip in set.Equipments)
                 {
-                    return equip;
+                    if (equip.Id == id)
+                    {
+                        return equip;
+                    }
                 }
             }
             return null;
         }
 
-        internal static void AddEquipment(Equipment equip)
+        internal static void AddEquipment(CompareSet set, Equipment equip)
         {
-            Equipments.Add(equip);
+            set.Equipments.Add(equip);
         }
 
 
-        internal static void DeleteEquipment(Equipment equip)
+        internal static void DeleteEquipment(CompareSet set, Equipment equip)
         {
-            Equipments.Remove(equip);
-            SaveEquipments();
+            set.Equipments.Remove(equip);
+            SaveCompareSets();
+        }
+
+        internal static CompareSet? GetSet(CompareSet compareSet)
+        {
+            foreach (var set in CompareSets)
+            {
+                if (compareSet == set)
+                {
+                    return set;
+                }
+            }
+            return null;
+        }
+
+        internal static void AddSet(CompareSet set)
+        {
+            CompareSets.Add(set);
+        }
+
+        internal static bool DeleteSet(CompareSet set)
+        {
+            bool isDeleted = CompareSets.Remove(set);
+            SaveCompareSets();
+            return isDeleted;
         }
     }
 }

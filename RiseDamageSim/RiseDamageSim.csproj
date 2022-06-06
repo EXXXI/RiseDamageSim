@@ -24,7 +24,7 @@
     <None Update="data\Monsters.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="save\Equipments.json">
+    <None Update="save\CompareSets.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
