@@ -123,47 +123,62 @@ namespace RiseDamageSim.Model
         /// </summary>
         public bool BrutalStrike { get; set; } = false;
 
-        public int PhysicsDamage {
+        public double PhysicsDamage {
             get
             {
                 int attack = Round89((((Round89(WeaponAttack) * AttackModifier1) + AdditionalAttack1) * AttackModifier2) + AdditionalAttack2);
                 double critRate = Math.Max(Math.Min(CriticalRate, 100), -100) / 100.0;
-                double expectedCriticalModifier;
-                if (critRate < 0)
+
+                // 各種会心計算
+                double normalProb;
+                int normalDamage;
+                double critProb = 0.0;
+                int critDamage = 0;
+                double badProb = 0.0;
+                int badDamage = 0;
+                double brutalProb = 0.0;
+                int brutalDamage = 0;
+                if (critRate > 0)
                 {
-                    if (BrutalStrike)
-                    {
-                        // 27%とすると期待値0.9525=1-0.0475
-                        // 30%とすると0.975=1-0.025
-                        // 33.3...%とすると期待値1
-                        expectedCriticalModifier = 1.0 + (critRate * 0.0475);
-                    }
-                    else
-                    {
-                        expectedCriticalModifier = 1.0 + (critRate * 0.25);
-                    }
+                    critProb = critRate;
+                    critDamage = Round45(attack * PhysicsSharpnessModifier * PhysicsCriticalModifier * PhysicsOtherModifier * Motion / 100.0 * PhysicsPhysiology / 100.0);
                 }
                 else
                 {
-                    expectedCriticalModifier = 1.0 + (critRate * (PhysicsCriticalModifier - 1.0));
+                    badProb = -critRate;
+                    if (BrutalStrike)
+                    {
+                        brutalProb = badProb * 0.27;
+                        badProb -= brutalProb;
+                        brutalDamage = Round45(attack * PhysicsSharpnessModifier * 1.5 * PhysicsOtherModifier * Motion / 100.0 * PhysicsPhysiology / 100.0);
+                    }
+                    badDamage = Round45(attack * PhysicsSharpnessModifier * 0.75 * PhysicsOtherModifier * Motion / 100.0 * PhysicsPhysiology / 100.0);
                 }
+                normalProb = 1.0 - critProb - badProb - brutalProb;
+                normalDamage = Round45(attack * PhysicsSharpnessModifier * PhysicsOtherModifier * Motion / 100.0 * PhysicsPhysiology / 100.0);
 
-                return Round45(attack * PhysicsSharpnessModifier * expectedCriticalModifier * PhysicsOtherModifier * Motion / 100.0 * PhysicsPhysiology / 100.0);
+                return (normalProb * normalDamage) + (critProb * critDamage) + (badProb * badDamage) + (brutalProb * brutalDamage); 
             }
         }
 
-        public int ElementDamage
+        public double ElementDamage
         {
             get
             {
                 int element = Round89(Round89((ElementValue * ElementModifier1) + AdditionalElement) * ElementModifier2);
-                double critRate = Math.Max(Math.Min(CriticalRate, 100), -100) / 100.0;
-                double expectedCriticalModifier = 1.0;
+                double critRate = Math.Max(Math.Min(CriticalRate, 100), 0) / 100.0;
+
+                // 会心計算
+                int critDamage = 0;
+                double critProb = 0.0;
                 if (critRate > 0 && ElementCriticalModifier > 1.0)
                 {
-                    expectedCriticalModifier = 1.0 + (critRate * (ElementCriticalModifier - 1.0));
+                    critDamage = Round45(element * ElementSharpnessModifier * ElementCriticalModifier * ElementOtherModifier * ElementPhysiology / 100.0);
+                    critProb = critRate;
                 }
-                return Round45(element * ElementSharpnessModifier * expectedCriticalModifier * ElementOtherModifier * ElementPhysiology / 100.0);
+                int normalDamage = Round45(element * ElementSharpnessModifier * ElementOtherModifier * ElementPhysiology / 100.0); ;
+
+                return (normalDamage * (1 - critProb)) + (critProb * critDamage);
             }
         }
 
