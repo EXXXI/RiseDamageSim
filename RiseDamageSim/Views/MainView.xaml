@@ -6,30 +6,39 @@
         xmlns:local="clr-namespace:RiseDamageSim.Views" xmlns:controls="clr-namespace:RiseDamageSim.Views.Controls" xmlns:viewmodels="clr-namespace:RiseDamageSim.ViewModels" xmlns:subviews="clr-namespace:RiseDamageSim.Views.SubViews" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="RiseDamageSim" Height="900" Width="850">
-    <StackPanel>
-        <TabControl Height="450">
-            <TabItem Header="装備登録">
-                <subviews:EquipmentTabSubView DataContext="{Binding EquipmentTabSubVM.Value, Mode=OneWay}"/>
-            </TabItem>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="450"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TabControl Height="450">
+                <TabItem Header="装備登録">
+                    <subviews:EquipmentTabSubView DataContext="{Binding EquipmentTabSubVM.Value, Mode=OneWay}"/>
+                </TabItem>
 
-            <TabItem Header="肉質・モーション">
-                <subviews:PhysiologyMotionTabSubView DataContext="{Binding PhysiologyMotionTabSubVM.Value, Mode=OneWay}"/>
-            </TabItem>
+                <TabItem Header="肉質・モーション">
+                    <subviews:PhysiologyMotionTabSubView DataContext="{Binding PhysiologyMotionTabSubVM.Value, Mode=OneWay}"/>
+                </TabItem>
 
-            <TabItem Header="戦い方">
-                <subviews:BattleStyleTabSubView DataContext="{Binding BattleStyleTabSubVM.Value, Mode=OneWay}"/>
-            </TabItem>
-        </TabControl>
-        <Button Command="{Binding CalcCommand}">ダメージ計算</Button>
-        <DataGrid ItemsSource="{Binding CalcResults.Value, Mode=OneWay}" IsReadOnly="true" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="装備" Binding="{Binding Name, Mode=OneWay}" />
-                <DataGridTextColumn Header="物理ダメージ" Binding="{Binding PhysicsDamage, Mode=OneWay}" />
-                <DataGridTextColumn Header="属性ダメージ" Binding="{Binding ElementDamage, Mode=OneWay}" />
-                <DataGridTextColumn Header="合計ダメージ" Binding="{Binding FullDamage, Mode=OneWay}" />
-                <DataGridTextColumn Header="平均会心率" Binding="{Binding ExpectedCriticalRate, Mode=OneWay}" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </StackPanel>
+                <TabItem Header="戦い方">
+                    <subviews:BattleStyleTabSubView DataContext="{Binding BattleStyleTabSubVM.Value, Mode=OneWay}"/>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+        <Button Command="{Binding CalcCommand}" Grid.Row="1">ダメージ計算</Button>
+        <ScrollViewer Grid.Row="2">
+            <DataGrid ItemsSource="{Binding CalcResults.Value, Mode=OneWay}" IsReadOnly="true" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="装備" Binding="{Binding Name, Mode=OneWay}" />
+                    <DataGridTextColumn Header="物理ダメージ" Binding="{Binding PhysicsDamage, Mode=OneWay}" />
+                    <DataGridTextColumn Header="属性ダメージ" Binding="{Binding ElementDamage, Mode=OneWay}" />
+                    <DataGridTextColumn Header="合計ダメージ" Binding="{Binding FullDamage, Mode=OneWay}" />
+                    <DataGridTextColumn Header="平均会心率" Binding="{Binding ExpectedCriticalRate, Mode=OneWay}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
     
 </Window>
