@@ -1,14 +1,14 @@
 [
   {
     "Name": "溜め0",
-    "MotionValue": 48,
+    "MotionValue": 52,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
     "ElementModifier": 1
   },
   {
     "Name": "溜め1",
-    "MotionValue": 48,
+    "MotionValue": 52,
     "SharpnessModifier": 1.1,
     "PhysicsElement": "Sever",
     "ElementModifier": 1.1
@@ -36,7 +36,7 @@
   },
   {
     "Name": "タックル1",
-    "MotionValue": 26,
+    "MotionValue": 28,
     "SharpnessModifier": 1,
     "PhysicsElement": "Blunt",
     "ElementModifier": 0
@@ -78,35 +78,35 @@
   },
   {
     "Name": "強溜め3",
-    "MotionValue": 115,
+    "MotionValue": 128,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
     "ElementModifier": 2.25
   },
   {
     "Name": "強薙ぎ0",
-    "MotionValue": 59,
+    "MotionValue": 72,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
     "ElementModifier": 1
   },
   {
     "Name": "強薙ぎ1",
-    "MotionValue": 59,
+    "MotionValue": 72,
     "SharpnessModifier": 1.1,
     "PhysicsElement": "Sever",
     "ElementModifier": 1.65
   },
   {
     "Name": "強薙ぎ2",
-    "MotionValue": 66,
+    "MotionValue": 82,
     "SharpnessModifier": 1.2,
     "PhysicsElement": "Sever",
     "ElementModifier": 1.8
   },
   {
     "Name": "強薙ぎ3",
-    "MotionValue": 72,
+    "MotionValue": 90,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
     "ElementModifier": 2.25
@@ -148,7 +148,7 @@
   },
   {
     "Name": "真溜め2強撃",
-    "MotionValue": 210,
+    "MotionValue": 220,
     "SharpnessModifier": 1.2,
     "PhysicsElement": "Sever",
     "ElementModifier": 1.5
@@ -162,14 +162,14 @@
   },
   {
     "Name": "真溜め3本体",
-    "MotionValue": 211,
+    "MotionValue": 225,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
     "ElementModifier": 1.7
   },
   {
     "Name": "真溜め3強撃",
-    "MotionValue": 264,
+    "MotionValue": 290,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
     "ElementModifier": 1.8
@@ -183,14 +183,14 @@
   },
   {
     "Name": "薙ぎ払い",
-    "MotionValue": 26,
+    "MotionValue": 34,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1
+    "ElementModifier": 1.25
   },
   {
     "Name": "切り上げ",
-    "MotionValue": 38,
+    "MotionValue": 41,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
     "ElementModifier": 1
@@ -270,132 +270,119 @@
     "MotionValue": 30,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1,
-    "IsSilkbind":  true
+    "ElementModifier": 1
   },
   {
     "Name": "ハンティングエッジ振り下ろし",
     "MotionValue": 80,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1,
-    "IsSilkbind": true
+    "ElementModifier": 1
   },
   {
     "Name": "エッジ派生斬り0",
     "MotionValue": 118,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1,
-    "IsSilkbind": true
+    "ElementModifier": 1
   },
   {
     "Name": "エッジ派生斬り1",
     "MotionValue": 118,
     "SharpnessModifier": 1.1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1.5,
-    "IsSilkbind": true
+    "ElementModifier": 1.5
   },
   {
     "Name": "エッジ派生斬り2",
     "MotionValue": 132,
     "SharpnessModifier": 1.2,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1.65,
-    "IsSilkbind": true
+    "ElementModifier": 1.65
   },
   {
     "Name": "エッジ派生斬り3",
     "MotionValue": 144,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
-    "ElementModifier": 2,
-    "IsSilkbind": true
+    "ElementModifier": 2
   },
   {
     "Name": "エッジ派生突き1",
     "MotionValue": 28,
     "SharpnessModifier": 1.1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1.3,
-    "IsSilkbind": true
+    "ElementModifier": 1.5
   },
   {
     "Name": "エッジ派生突き2",
     "MotionValue": 38,
     "SharpnessModifier": 1.2,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1.4,
-    "IsSilkbind": true
+    "ElementModifier": 1.7
   },
   {
     "Name": "エッジ派生突き3",
     "MotionValue": 45,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1.5,
-    "IsSilkbind": true
+    "ElementModifier": 2
   },
   {
     "Name": "ガードタックル0",
-    "MotionValue": 45,
+    "MotionValue": 34,
     "SharpnessModifier": 1,
     "PhysicsElement": "Blunt",
-    "ElementModifier": 0
+    "ElementModifier": 1
   },
   {
     "Name": "ガードタックル1",
-    "MotionValue": 45,
+    "MotionValue": 37,
     "SharpnessModifier": 1,
     "PhysicsElement": "Blunt",
-    "ElementModifier": 0
+    "ElementModifier": 1
   },
   {
     "Name": "ガードタックル2",
-    "MotionValue": 45,
+    "MotionValue": 46,
     "SharpnessModifier": 1,
     "PhysicsElement": "Blunt",
-    "ElementModifier": 0
+    "ElementModifier": 1
   },
   {
     "Name": "ガードタックル3",
-    "MotionValue": 45,
+    "MotionValue": 62,
     "SharpnessModifier": 1,
     "PhysicsElement": "Blunt",
-    "ElementModifier": 0
+    "ElementModifier": 1
   },
   {
     "Name": "金剛溜め0",
     "MotionValue": 78,
     "SharpnessModifier": 1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1,
-    "IsSilkbind": true
+    "ElementModifier": 1
   },
   {
     "Name": "金剛溜め1",
     "MotionValue": 78,
     "SharpnessModifier": 1.1,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1.65,
-    "IsSilkbind": true
+    "ElementModifier": 1.65
   },
   {
     "Name": "金剛溜め2",
     "MotionValue": 108,
     "SharpnessModifier": 1.2,
     "PhysicsElement": "Sever",
-    "ElementModifier": 1.8,
-    "IsSilkbind": true
+    "ElementModifier": 1.8
   },
   {
     "Name": "金剛溜め3",
     "MotionValue": 138,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
-    "ElementModifier": 2.25,
-    "IsSilkbind": true
+    "ElementModifier": 2.25
   },
   {
     "Name": "激昂斬0",
@@ -413,16 +400,163 @@
   },
   {
     "Name": "激昂斬2",
-    "MotionValue": 133,
+    "MotionValue": 138,
     "SharpnessModifier": 1.2,
     "PhysicsElement": "Sever",
     "ElementModifier": 2
   },
   {
     "Name": "激昂斬3",
-    "MotionValue": 159,
+    "MotionValue": 179,
     "SharpnessModifier": 1.3,
     "PhysicsElement": "Sever",
     "ElementModifier": 3
+  },
+  {
+    "Name": "降流斬り1",
+    "MotionValue": 48,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "降流斬り2",
+    "MotionValue": 86,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1.05
+  },
+  {
+    "Name": "降流斬り3",
+    "MotionValue": 110,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1.2
+  },
+  {
+    "Name": "渦流斬り1",
+    "MotionValue": 28,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1.2
+  },
+  {
+    "Name": "渦流斬り2",
+    "MotionValue": 55,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1.6
+  },
+  {
+    "Name": "渦流斬り2-2",
+    "MotionValue": 20,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Blunt",
+    "ElementModifier": 1.1
+  },
+  {
+    "Name": "渦流斬り3",
+    "MotionValue": 55,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 2
+  },
+  {
+    "Name": "渦流斬り3-2",
+    "MotionValue": 60,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 2
+  },
+  {
+    "Name": "昇流斬り1",
+    "MotionValue": 35,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "昇流斬り2",
+    "MotionValue": 65,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "昇流斬り3",
+    "MotionValue": 48,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "昇流斬り3-2",
+    "MotionValue": 80,
+    "SharpnessModifier": 1,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "構え真初撃",
+    "MotionValue": 22,
+    "SharpnessModifier": 1.35,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "構え真本体",
+    "MotionValue": 225,
+    "SharpnessModifier": 1.755,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1.7
+  },
+  {
+    "Name": "構え真強撃",
+    "MotionValue": 290,
+    "SharpnessModifier": 1.755,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1.8
+  },
+  {
+    "Name": "構え激昂",
+    "MotionValue": 179,
+    "SharpnessModifier": 1.69,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 3
+  },
+  {
+    "Name": "構え降流斬り3",
+    "MotionValue": 110,
+    "SharpnessModifier": 1.25,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "構え渦流斬り3",
+    "MotionValue": 55,
+    "SharpnessModifier": 1.25,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "構え渦流斬り3-2",
+    "MotionValue": 60,
+    "SharpnessModifier": 1.25,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "構え昇流斬り3",
+    "MotionValue": 48,
+    "SharpnessModifier": 1.25,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
+  },
+  {
+    "Name": "構え昇流斬り3-2",
+    "MotionValue": 80,
+    "SharpnessModifier": 1.25,
+    "PhysicsElement": "Sever",
+    "ElementModifier": 1
   }
 ]

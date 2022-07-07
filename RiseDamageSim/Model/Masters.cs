@@ -38,27 +38,15 @@ namespace RiseDamageSim.Model
 
         private static void SetRampageSkillsData()
         {
-            RampageSkills = new();
-            foreach (var weapon in GreatSwords)
+            string json = File.ReadAllText("data/RampageSkills.json");
+            List<string>? rampageSkills = JsonSerializer.Deserialize<List<string>>(json, options);
+            if (rampageSkills == null)
             {
-                foreach (var weaponRampage in weapon.RampageSkills)
-                {
-                    bool isExist = false;
-                    foreach (var rampage in RampageSkills)
-                    {
-                        if (rampage == weaponRampage)
-                        {
-                            isExist = true;
-                            break;
-                        }
-                    }
-                    if (!isExist)
-                    {
-                        RampageSkills.Add(weaponRampage);
-                    }
-                }
+                throw new FileFormatException("data/RampageSkills.json");
             }
+            RampageSkills = rampageSkills;
             RampageSkills.Sort();
+
         }
 
         private static void LoadWeaponDatas()
