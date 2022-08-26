@@ -330,19 +330,44 @@ namespace RiseDamageSim.Domain
                                     switch (equip.CriticalDrawLv)
                                     {
                                         case 1:
-                                            motionNewDamage.CriticalRate += 10;
+                                            motionNewDamage.CriticalRate += 15;
                                             break;
                                         case 2:
-                                            motionNewDamage.CriticalRate += 20;
+                                            motionNewDamage.CriticalRate += 30;
                                             break;
                                         case >= 3:
-                                            motionNewDamage.CriticalRate += 40;
+                                            motionNewDamage.CriticalRate += 60;
                                             break;
                                         default:
                                             break;
                                     }
                                     motionNewDamages.Add(motionNewDamage);
                                 }
+                            }
+                        }
+
+                        // チャージマスター
+                        if (equip.ChargeMasterLv > 0 && motion.ChargeLevel > 0)
+                        {
+                            double modifier = 1;
+                            switch (equip.ChargeMasterLv)
+                            {
+                                case 1:
+                                    modifier = 1.1;
+                                    break;
+                                case 2:
+                                    modifier = 1.3;
+                                    break;
+                                case >= 3:
+                                    modifier = 1.5;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            foreach (var motionNewDamage in motionNewDamages)
+                            {
+                                motionNewDamage.ElementOtherModifier *= modifier;
                             }
                         }
 
@@ -786,6 +811,34 @@ namespace RiseDamageSim.Domain
             }
 
             // 会心率強化
+            if (equip.CritAugLv > 0)
+            {
+                int level = equip.CritAugLv;
+                int add = 0;
+                switch (level)
+                {
+                    case 1:
+                        add = 5;
+                        break;
+                    case 2:
+                        add = 10;
+                        break;
+                    case 3:
+                        add = 15;
+                        break;
+                    case 4:
+                        add = 20;
+                        break;
+                    default:
+                        break;
+                }
+                foreach (var newDamage in newDamages)
+                {
+                    newDamage.CriticalRate += add;
+                }
+            }
+
+            // 会心率強化
             if (GetRanpageLv(equip, "会心率強化") > 0)
             {
                 int level = GetRanpageLv(equip, "会心率強化");
@@ -833,12 +886,13 @@ namespace RiseDamageSim.Domain
                 }
             }
 
-            // 鋼龍の魂
-            if (HasRanpage(equip, "鋼龍の魂") &&
+            // 鋼龍の魂・連撃
+            if ((HasRanpage(equip, "鋼龍の魂") || equip.ChainCritLv > 0) &&
                 (Style.KushalaDaoraSoulProb > 0 || Style.KushalaDaoraSoul5Prob > 0))
             {
                 oldDamages = newDamages;
                 newDamages = new();
+                bool hasRanpage = HasRanpage(equip, "鋼龍の魂");
                 foreach (var oldDamage in oldDamages)
                 {
                     double kushalaDaoraSoul5Prob = Style.KushalaDaoraSoul5Prob / 100.0;
@@ -855,7 +909,27 @@ namespace RiseDamageSim.Domain
                     {
                         DamagePattern newDamage = oldDamage.Clone();
                         newDamage.Probability = oldDamage.Probability * kushalaDaoraSoulProb;
-                        newDamage.CriticalRate += 25;
+                        if (hasRanpage)
+                        {
+                            newDamage.CriticalRate += 25;
+                        }
+                        switch (equip.ChainCritLv)
+                        {
+                            case 1:
+                                newDamage.AdditionalAttack1 += 5;
+                                newDamage.AdditionalElement += 5;
+                                break;
+                            case 2:
+                                newDamage.AdditionalAttack1 += 5;
+                                newDamage.AdditionalElement += 5;
+                                break;
+                            case >= 3:
+                                newDamage.AdditionalAttack1 += 5;
+                                newDamage.AdditionalElement += 5;
+                                break;
+                            default:
+                                break;
+                        }
                         newDamages.Add(newDamage);
                     }
                     // 5-
@@ -863,7 +937,27 @@ namespace RiseDamageSim.Domain
                     {
                         DamagePattern newDamage = oldDamage.Clone();
                         newDamage.Probability = oldDamage.Probability * kushalaDaoraSoul5Prob;
-                        newDamage.CriticalRate += 30;
+                        if (hasRanpage)
+                        {
+                            newDamage.CriticalRate += 30;
+                        }
+                        switch (equip.ChainCritLv)
+                        {
+                            case 1:
+                                newDamage.AdditionalAttack1 += 10;
+                                newDamage.AdditionalElement += 8;
+                                break;
+                            case 2:
+                                newDamage.AdditionalAttack1 += 12;
+                                newDamage.AdditionalElement += 10;
+                                break;
+                            case >= 3:
+                                newDamage.AdditionalAttack1 += 15;
+                                newDamage.AdditionalElement += 15;
+                                break;
+                            default:
+                                break;
+                        }
                         newDamages.Add(newDamage);
                     }
                 }
@@ -897,6 +991,129 @@ namespace RiseDamageSim.Domain
                 }
             }
 
+            // 狂竜症
+            if (Style.FrenzyInfectProb > 0 || Style.FrenzyTreatProb > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double frenzyTreatProb = Style.FrenzyTreatProb / 100.0;
+                    double frenzyInfectProb = 0;
+                    if (equip.BloodlustLv > 0)
+                    {
+                        frenzyInfectProb = Math.Max(Style.FrenzyInfectProb / 100.0 - frenzyTreatProb, 0.0);
+                    }
+
+                    // 通常
+                    if (frenzyTreatProb + frenzyInfectProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - frenzyTreatProb - frenzyInfectProb);
+                        newDamages.Add(newDamage);
+                    }
+                    // 感染状態(狂竜症【蝕】のみ)
+                    if (frenzyInfectProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * frenzyInfectProb;
+                        switch (equip.BloodlustLv)
+                        {
+                            case 1:
+                                newDamage.AdditionalAttack1 += 10;
+                                newDamage.AdditionalElement += 5;
+                                break;
+                            case 2:
+                                newDamage.AdditionalAttack1 += 15;
+                                newDamage.AdditionalElement += 7;
+                                break;
+                            case >= 3:
+                                newDamage.AdditionalAttack1 += 20;
+                                newDamage.AdditionalElement += 10;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                    // 克服状態
+                    if (frenzyTreatProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * frenzyTreatProb;
+                        switch (equip.BloodlustLv)
+                        {
+                            case 0:
+                                newDamage.CriticalRate += 15;
+                                break;
+                            case 1:
+                                newDamage.CriticalRate += 20;
+                                break;
+                            case 2:
+                                newDamage.CriticalRate += 25;
+                                break;
+                            case >= 3:
+                                newDamage.CriticalRate += 25;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                }
+            }
+
+            // 攻勢
+            if (equip.ForayLv > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double blightProb = 0;
+                    blightProb += Style.FireBlightProb / 100.0;
+                    blightProb += Style.WaterBlightProb / 100.0;
+                    blightProb += Style.IceBlightProb / 100.0;
+                    blightProb += Style.ThunderBlightProb / 100.0;
+                    blightProb = Math.Min(blightProb, 1.0);
+                    double poisonProb = Style.PoisonProb / 100.0;
+                    double paralysisProb = Style.ParalysisProb / 100.0;
+
+                    double forayProb = 1.0 - (1.0 - blightProb) * (1.0 - poisonProb) * (1.0 - paralysisProb);
+
+                    // 通常
+                    if (forayProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - forayProb);
+                        newDamages.Add(newDamage);
+                    }
+                    // 攻勢
+                    if (forayProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * forayProb;
+                        switch (equip.ForayLv)
+                        {
+                            case 1:
+                                newDamage.AdditionalAttack1 += 10;
+                                break;
+                            case 2:
+                                newDamage.AdditionalAttack1 += 10;
+                                newDamage.CriticalRate += 10;
+                                break;
+                            case >= 3:
+                                newDamage.AdditionalAttack1 += 15;
+                                newDamage.CriticalRate += 20;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                }
+            }
+
             return newDamages;
         }
 
@@ -914,10 +1131,17 @@ namespace RiseDamageSim.Domain
             double count = Style.AttackCount;
 
             // 匠
-            double additional = 0.0;
+            double handicraftAdditional = 0.0;
             if (equip.HandicraftLv > 0)
             {
-                additional = equip.HandicraftLv * 10.0;
+                handicraftAdditional = equip.HandicraftLv * 10.0;
+            }
+
+            // 斬れ味錬成
+            double augAdditional = 0.0;
+            if (equip.SharpAugLv > 0)
+            {
+                augAdditional = equip.SharpAugLv * 10.0;
             }
 
             // 業物
@@ -993,7 +1217,7 @@ namespace RiseDamageSim.Domain
                 }
             }
 
-            var useSharpness = weaponSharpness.GetUseSharpness(count, additional);
+            var useSharpness = weaponSharpness.GetUseSharpness(count, handicraftAdditional, augAdditional);
 
             // 切れ味計算&鈍器使い
             oldDamages = newDamages;
@@ -1123,6 +1347,33 @@ namespace RiseDamageSim.Domain
                     newDamage.PhysicsSharpnessModifier *= 1.39;
                     newDamage.ElementSharpnessModifier *= 1.25;
                     newDamages.Add(newDamage);
+                }
+            }
+
+            // 研磨術【鋭】
+            if (equip.GrinderLv > 0 && Style.GrinderProb > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double grinderProb = Style.GrinderProb / 100.0;
+                    // 通常
+                    if (grinderProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - grinderProb);
+                        newDamages.Add(newDamage);
+                    }
+                    // 研磨術【鋭】
+                    if (grinderProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * grinderProb;
+                        newDamage.PhysicsSharpnessModifier *= 1.1;
+                        newDamage.ElementSharpnessModifier *= 1.07;
+                        newDamages.Add(newDamage);
+                    }
                 }
             }
 
@@ -2396,6 +2647,34 @@ namespace RiseDamageSim.Domain
                 }
             }
 
+            // 攻撃錬成
+            if (equip.AttackAugLv > 0)
+            {
+                int level = equip.AttackAugLv;
+                int add = 0;
+                switch (level)
+                {
+                    case 1:
+                        add = 5;
+                        break;
+                    case 2:
+                        add = 10;
+                        break;
+                    case 3:
+                        add = 15;
+                        break;
+                    case 4:
+                        add = 20;
+                        break;
+                    default:
+                        break;
+                }
+                foreach (var newDamage in newDamages)
+                {
+                    newDamage.WeaponAttack += add;
+                }
+            }
+
             // 攻撃力強化
             if (GetRanpageLv(equip, "攻撃力強化") > 0)
             {
@@ -2432,6 +2711,37 @@ namespace RiseDamageSim.Domain
                     if (newDamage.ElementPhysiology >= 25)
                     {
                         newDamage.ElementOtherModifier *= 1.30;
+                    }
+                }
+            }
+
+            // 属性錬成
+            if (equip.ElementAugLv > 0)
+            {
+                int level = equip.ElementAugLv;
+                int add = 0;
+                switch (level)
+                {
+                    case 1:
+                        add = 5;
+                        break;
+                    case 2:
+                        add = 10;
+                        break;
+                    case 3:
+                        add = 15;
+                        break;
+                    case 4:
+                        add = 20;
+                        break;
+                    default:
+                        break;
+                }
+                foreach (var newDamage in newDamages)
+                {
+                    if (newDamage.ElementKind != Element.None)
+                    {
+                        newDamage.ElementValue += add;
                     }
                 }
             }
@@ -2646,6 +2956,358 @@ namespace RiseDamageSim.Domain
                     newDamage.BrutalStrike = true;
                 }
             }
+
+            // 業鎧【修羅】
+            if (equip.MailOfHellfireLv > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double swapRedProb = Style.SwapRedProb / 100.0;
+                    // 蒼の書
+                    if (swapRedProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - swapRedProb);
+                        switch (equip.MailOfHellfireLv)
+                        {
+                            case 1:
+                                newDamage.ElementModifier1 *= 1.05;
+                                break;
+                            case 2:
+                                newDamage.ElementModifier1 *= 1.10;
+                                break;
+                            case >= 3:
+                                newDamage.ElementModifier1 *= 1.20;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                    // 朱の書
+                    if (swapRedProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * swapRedProb;
+                        switch (equip.MailOfHellfireLv)
+                        {
+                            case 1:
+                                newDamage.AdditionalAttack1 += 15;
+                                break;
+                            case 2:
+                                newDamage.AdditionalAttack1 += 25;
+                                break;
+                            case >= 3:
+                                newDamage.AdditionalAttack1 += 35;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                }
+            }
+
+            // TODO: 本来は業鎧と独立してはいけない
+            // 伏魔響命
+            if (equip.DerelictionLv > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double swapRedProb = Style.SwapRedProb / 100.0;
+                    double dereliction3Prob = Style.Dereliction3Prob / 100.0;
+                    double dereliction2Prob = Math.Max(Style.Dereliction2Prob / 100.0 - dereliction3Prob, 0.0);
+                    double dereliction1Prob = 1.0 - dereliction2Prob - dereliction3Prob;
+
+                    // 蒼の書
+                    if (swapRedProb < 1)
+                    {
+                        // キュリア1匹
+                        if (dereliction1Prob > 0)
+                        {
+                            DamagePattern newDamage = oldDamage.Clone();
+                            newDamage.Probability = oldDamage.Probability * (1 - swapRedProb) * dereliction1Prob;
+                            switch (equip.DerelictionLv)
+                            {
+                                case 1:
+                                    newDamage.AdditionalAttack1 += 15;
+                                    break;
+                                case 2:
+                                    newDamage.AdditionalAttack1 += 20;
+                                    break;
+                                case >= 3:
+                                    newDamage.AdditionalAttack1 += 25;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            newDamages.Add(newDamage);
+                        }
+                        // キュリア2匹
+                        if (dereliction2Prob > 0)
+                        {
+                            DamagePattern newDamage = oldDamage.Clone();
+                            newDamage.Probability = oldDamage.Probability * (1 - swapRedProb) * dereliction2Prob;
+                            switch (equip.DerelictionLv)
+                            {
+                                case 1:
+                                    newDamage.AdditionalAttack1 += 20;
+                                    break;
+                                case 2:
+                                    newDamage.AdditionalAttack1 += 25;
+                                    break;
+                                case >= 3:
+                                    newDamage.AdditionalAttack1 += 30;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            newDamages.Add(newDamage);
+                        }
+                        // キュリア3匹
+                        if (dereliction3Prob > 0)
+                        {
+                            DamagePattern newDamage = oldDamage.Clone();
+                            newDamage.Probability = oldDamage.Probability * (1 - swapRedProb) * dereliction3Prob;
+                            switch (equip.DerelictionLv)
+                            {
+                                case 1:
+                                    newDamage.AdditionalAttack1 += 25;
+                                    break;
+                                case 2:
+                                    newDamage.AdditionalAttack1 += 30;
+                                    break;
+                                case >= 3:
+                                    newDamage.AdditionalAttack1 += 35;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            newDamages.Add(newDamage);
+                        }
+                    }
+                    // 朱の書
+                    if (swapRedProb > 0)
+                    {
+                        // キュリア1匹
+                        if (dereliction1Prob > 0)
+                        {
+                            DamagePattern newDamage = oldDamage.Clone();
+                            newDamage.Probability = oldDamage.Probability * swapRedProb * dereliction1Prob;
+                            switch (equip.DerelictionLv)
+                            {
+                                case 1:
+                                    newDamage.AdditionalElement += 5;
+                                    break;
+                                case 2:
+                                    newDamage.AdditionalAttack1 += 7;
+                                    break;
+                                case >= 3:
+                                    newDamage.AdditionalAttack1 += 10;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            newDamages.Add(newDamage);
+                        }
+                        // キュリア2匹
+                        if (dereliction2Prob > 0)
+                        {
+                            DamagePattern newDamage = oldDamage.Clone();
+                            newDamage.Probability = oldDamage.Probability * swapRedProb * dereliction2Prob;
+                            switch (equip.DerelictionLv)
+                            {
+                                case 1:
+                                    newDamage.AdditionalElement += 8;
+                                    break;
+                                case 2:
+                                    newDamage.AdditionalAttack1 += 12;
+                                    break;
+                                case >= 3:
+                                    newDamage.AdditionalAttack1 += 15;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            newDamages.Add(newDamage);
+                        }
+                        // キュリア3匹
+                        if (dereliction3Prob > 0)
+                        {
+                            DamagePattern newDamage = oldDamage.Clone();
+                            newDamage.Probability = oldDamage.Probability * swapRedProb * dereliction3Prob;
+                            switch (equip.DerelictionLv)
+                            {
+                                case 1:
+                                    newDamage.AdditionalElement += 12;
+                                    break;
+                                case 2:
+                                    newDamage.AdditionalAttack1 += 15;
+                                    break;
+                                case >= 3:
+                                    newDamage.AdditionalAttack1 += 20;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            newDamages.Add(newDamage);
+                        }
+                    }
+                }
+            }
+
+            // 巧撃
+            if (equip.AdrenalineRushLv > 0 && Style.AdrenalineRushProb > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double adrenalineRushProb = Style.AdrenalineRushProb / 100.0;
+                    // 通常
+                    if (adrenalineRushProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - adrenalineRushProb);
+                        newDamages.Add(newDamage);
+                    }
+                    // 巧撃
+                    if (adrenalineRushProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * adrenalineRushProb;
+                        switch (equip.AdrenalineRushLv)
+                        {
+                            case 1:
+                                newDamage.AdditionalAttack1 += 10;
+                                break;
+                            case 2:
+                                newDamage.AdditionalAttack1 += 15;
+                                break;
+                            case >= 3:
+                                newDamage.AdditionalAttack1 += 30;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                }
+            }
+
+            // 災禍転福
+            if (equip.CoalescenceLv > 0 && Style.CoalescenceProb > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double coalescenceProb = Style.CoalescenceProb / 100.0;
+                    // 通常
+                    if (coalescenceProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - coalescenceProb);
+                        newDamages.Add(newDamage);
+                    }
+                    // 災禍転福
+                    if (coalescenceProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * coalescenceProb;
+                        switch (equip.CoalescenceLv)
+                        {
+                            case 1:
+                                newDamage.AdditionalAttack1 += 12;
+                                newDamage.AdditionalElement += 2;
+                                break;
+                            case 2:
+                                newDamage.AdditionalAttack1 += 15;
+                                newDamage.AdditionalElement += 3;
+                                break;
+                            case >= 3:
+                                newDamage.AdditionalAttack1 += 18;
+                                newDamage.AdditionalElement += 4;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                }
+            }
+
+            // 弱点特効【属性】
+            if (equip.ElementExploitLv > 0)
+            {
+                double modifier = 1;
+                switch (equip.ElementExploitLv)
+                {
+                    case 1:
+                        modifier = 1.1;
+                        break;
+                    case 2:
+                        modifier = 1.125;
+                        break;
+                    case >= 3:
+                        modifier = 1.15;
+                        break;
+                    default:
+                        break;
+                }
+
+                foreach (var newDamage in newDamages)
+                {
+                    if (newDamage.ElementPhysiology >= 20)
+                    {
+                        newDamage.ElementOtherModifier *= modifier;
+                    }
+                }
+            }
+
+            // 闇討ち
+            if (equip.SneakAttackLv > 0 && Style.SneakAttackProb > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    double sneakAttackProb = Style.SneakAttackProb / 100.0;
+                    // 通常
+                    if (sneakAttackProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - sneakAttackProb);
+                        newDamages.Add(newDamage);
+                    }
+                    // 闇討ち
+                    if (sneakAttackProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * sneakAttackProb;
+                        switch (equip.SneakAttackLv)
+                        {
+                            case 1:
+                                newDamage.PhysicsOtherModifier *= 1.05;
+                                break;
+                            case 2:
+                                newDamage.PhysicsOtherModifier *= 1.1;
+                                break;
+                            case >= 3:
+                                newDamage.PhysicsOtherModifier *= 1.2;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                }
+            }
+
 
             return newDamages;
         }

@@ -55,6 +55,17 @@ namespace RiseDamageSim.ViewModels.SubViews
         public ReactivePropertySlim<double> IceBlightProb { get; set; } = new();
         public ReactivePropertySlim<double> AttackCount { get; set; } = new(30);
         public ReactivePropertySlim<double> Spiribirds { get; set; } = new();
+        public ReactivePropertySlim<double> FrenzyInfectProb { get; set; } = new();
+        public ReactivePropertySlim<double> FrenzyTreatProb { get; set; } = new();
+        public ReactivePropertySlim<double> GrinderProb { get; set; } = new();
+        public ReactivePropertySlim<double> PoisonProb { get; set; } = new();
+        public ReactivePropertySlim<double> ParalysisProb { get; set; } = new();
+        public ReactivePropertySlim<double> AdrenalineRushProb { get; set; } = new();
+        public ReactivePropertySlim<double> CoalescenceProb { get; set; } = new();
+        public ReactivePropertySlim<double> Dereliction2Prob { get; set; } = new(85);
+        public ReactivePropertySlim<double> Dereliction3Prob { get; set; } = new(70);
+        public ReactivePropertySlim<double> SneakAttackProb { get; set; } = new();
+        public ReactivePropertySlim<double> SwapRedProb { get; set; } = new();
 
         public BattleStyle GetStyle()
         {
@@ -104,6 +115,17 @@ namespace RiseDamageSim.ViewModels.SubViews
             style.IceBlightProb = IceBlightProb.Value;
             style.AttackCount = AttackCount.Value;
             style.Spiribirds = Spiribirds.Value;
+            style.FrenzyInfectProb = FrenzyInfectProb.Value;
+            style.FrenzyTreatProb = FrenzyTreatProb.Value;
+            style.GrinderProb = GrinderProb.Value;
+            style.PoisonProb = PoisonProb.Value;
+            style.ParalysisProb = ParalysisProb.Value;
+            style.AdrenalineRushProb = AdrenalineRushProb.Value;
+            style.CoalescenceProb = CoalescenceProb.Value;
+            style.Dereliction2Prob = Dereliction2Prob.Value;
+            style.Dereliction3Prob = Dereliction3Prob.Value;
+            style.SneakAttackProb = SneakAttackProb.Value;
+            style.SwapRedProb = SwapRedProb.Value;
 
             return style;
         }

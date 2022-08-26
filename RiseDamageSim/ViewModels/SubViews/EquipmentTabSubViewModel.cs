@@ -22,12 +22,32 @@ namespace RiseDamageSim.ViewModels.SubViews
         public ReactivePropertySlim<string> SelectedRampageSkill3 { get; set; } = new();
         public ReactivePropertySlim<List<int>> SkillLvs { get; set; } = new();
         public ReactivePropertySlim<List<EquipmentRowViewModel>> EquipmentVMs { get; set; } = new();
-        public ReactivePropertySlim<bool> ShowAllRampage { get; set; } = new(false);
+        public ReactivePropertySlim<bool> ShowAllRampage { get; set; } = new(true);
         public ReactivePropertySlim<List<CompareSet>> CompareSets { get; set; } = new();
         public ReactivePropertySlim<CompareSet> SelectedSet { get; set; } = new();
         public ReactivePropertySlim<string> SetName { get; set; } = new();
 
         #region スキルレベル
+        /// <summary>
+        /// 攻撃錬成
+        /// </summary>
+        public ReactivePropertySlim<int> AttackAugLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 斬れ味錬成
+        /// </summary>
+        public ReactivePropertySlim<int> SharpAugLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 会心錬成
+        /// </summary>
+        public ReactivePropertySlim<int> CritAugLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 属性錬成
+        /// </summary>
+        public ReactivePropertySlim<int> ElementAugLv { get; set; } = new(0);
+
         /// <summary>
         /// 匠
         /// </summary>
@@ -197,6 +217,61 @@ namespace RiseDamageSim.ViewModels.SubViews
         /// しまき装備数(雷神龍の魂)
         /// </summary>
         public ReactivePropertySlim<int> IbushiLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 狂竜症【蝕】
+        /// </summary>
+        public ReactivePropertySlim<int> BloodlustLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 研磨術【鋭】
+        /// </summary>
+        public ReactivePropertySlim<int> GrinderLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 業鎧【修羅】
+        /// </summary>
+        public ReactivePropertySlim<int> MailOfHellfireLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 攻勢
+        /// </summary>
+        public ReactivePropertySlim<int> ForayLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 巧撃
+        /// </summary>
+        public ReactivePropertySlim<int> AdrenalineRushLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 災禍転福
+        /// </summary>
+        public ReactivePropertySlim<int> CoalescenceLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 弱点特効【属性】
+        /// </summary>
+        public ReactivePropertySlim<int> ElementExploitLv { get; set; } = new(0);
+
+        /// <summary>
+        /// チャージマスター
+        /// </summary>
+        public ReactivePropertySlim<int> ChargeMasterLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 伏魔響命
+        /// </summary>
+        public ReactivePropertySlim<int> DerelictionLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 闇討ち
+        /// </summary>
+        public ReactivePropertySlim<int> SneakAttackLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 連撃
+        /// </summary>
+        public ReactivePropertySlim<int> ChainCritLv { get; set; } = new(0);
         #endregion
 
         public ReactiveCommand AddEquipmentCommand { get; } = new ReactiveCommand();
@@ -270,6 +345,10 @@ namespace RiseDamageSim.ViewModels.SubViews
             equip.RampageSkill1 = SelectedRampageSkill1.Value;
             equip.RampageSkill2 = SelectedRampageSkill2.Value;
             equip.RampageSkill3 = SelectedRampageSkill3.Value;
+            equip.AttackAugLv = AttackAugLv.Value;
+            equip.SharpAugLv = SharpAugLv.Value;
+            equip.CritAugLv = CritAugLv.Value;
+            equip.ElementAugLv = ElementAugLv.Value;
             equip.HandicraftLv = HandicraftLv.Value;
             equip.RazorSharpLv = RazorSharpLv.Value;
             equip.MastersTouchLv = MastersTouchLv.Value;
@@ -304,6 +383,17 @@ namespace RiseDamageSim.ViewModels.SubViews
             equip.KushalaBlessingLv = KushalaBlessingLv.Value;
             equip.MindsEyeLv = MindsEyeLv.Value;
             equip.IbushiLv = IbushiLv.Value;
+            equip.BloodlustLv = BloodlustLv.Value;
+            equip.GrinderLv = GrinderLv.Value;
+            equip.MailOfHellfireLv = MailOfHellfireLv.Value;
+            equip.ForayLv = ForayLv.Value;
+            equip.AdrenalineRushLv = AdrenalineRushLv.Value;
+            equip.CoalescenceLv = CoalescenceLv.Value;
+            equip.ElementExploitLv = ElementExploitLv.Value;
+            equip.ChargeMasterLv = ChargeMasterLv.Value;
+            equip.DerelictionLv = DerelictionLv.Value;
+            equip.SneakAttackLv = SneakAttackLv.Value;
+            equip.ChainCritLv = ChainCritLv.Value;
 
             Masters.SaveCompareSets();
             ShowEquipments();
@@ -318,6 +408,10 @@ namespace RiseDamageSim.ViewModels.SubViews
             SelectedRampageSkill1.Value = equip.RampageSkill1;
             SelectedRampageSkill2.Value = equip.RampageSkill2;
             SelectedRampageSkill3.Value = equip.RampageSkill3;
+            AttackAugLv.Value = equip.AttackAugLv;
+            SharpAugLv.Value = equip.SharpAugLv;
+            CritAugLv.Value = equip.CritAugLv;
+            ElementAugLv.Value = equip.ElementAugLv;
             HandicraftLv.Value = equip.HandicraftLv;
             RazorSharpLv.Value = equip.RazorSharpLv;
             MastersTouchLv.Value = equip.MastersTouchLv;
@@ -351,7 +445,18 @@ namespace RiseDamageSim.ViewModels.SubViews
             TeostraBlessingLv.Value = equip.TeostraBlessingLv;
             KushalaBlessingLv.Value = equip.KushalaBlessingLv;
             MindsEyeLv.Value = equip.MindsEyeLv;
-            IbushiLv.Value= equip.IbushiLv;
+            IbushiLv.Value = equip.IbushiLv;
+            BloodlustLv.Value = equip.BloodlustLv;
+            GrinderLv.Value = equip.GrinderLv;
+            MailOfHellfireLv.Value = equip.MailOfHellfireLv;
+            ForayLv.Value = equip.ForayLv;
+            AdrenalineRushLv.Value = equip.AdrenalineRushLv;
+            CoalescenceLv.Value = equip.CoalescenceLv;
+            ElementExploitLv.Value = equip.ElementExploitLv;
+            ChargeMasterLv.Value = equip.ChargeMasterLv;
+            DerelictionLv.Value = equip.DerelictionLv;
+            SneakAttackLv.Value = equip.SneakAttackLv;
+            ChainCritLv.Value = equip.ChainCritLv;
         }
 
         internal void DeleteEquipment(Equipment original)

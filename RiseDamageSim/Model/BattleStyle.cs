@@ -52,5 +52,16 @@ namespace RiseDamageSim.Model
         public double IceBlightProb { get; set; }
         public double AttackCount { get; set; }
         public double Spiribirds { get; set; }
+        public double FrenzyInfectProb { get; set; }
+        public double FrenzyTreatProb { get; set; }
+        public double GrinderProb { get; set; }
+        public double PoisonProb { get; set; }
+        public double ParalysisProb { get; set; }
+        public double AdrenalineRushProb { get; set; }
+        public double CoalescenceProb { get; set; }
+        public double Dereliction2Prob { get; set; }
+        public double Dereliction3Prob { get; set; }
+        public double SneakAttackProb { get; set; }
+        public double SwapRedProb { get; set; }
     }
 }

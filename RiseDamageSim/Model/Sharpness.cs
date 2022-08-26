@@ -49,10 +49,10 @@ namespace RiseDamageSim.Model
             }
         }
 
-        public Sharpness GetUseSharpness(double useCount, double additional)
+        public Sharpness GetUseSharpness(double useCount, double handicraftAdditional, double augAdditional)
         {
             List<double> full = new() { Red, Orange, Yellow, Green, Blue, White, Purple };
-            double max = Max + additional;
+            double max = Max + handicraftAdditional;
             double sum1 = 0.0;
             List<double> maxed = new();
             foreach (var sharp in full)
@@ -63,7 +63,7 @@ namespace RiseDamageSim.Model
                 }
                 else if(sum1 + sharp >= max)
                 {
-                    maxed.Add(max - sum1);
+                    maxed.Add(max - sum1 + augAdditional);
                     sum1 = max;
                 }
                 else

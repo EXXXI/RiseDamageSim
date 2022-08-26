@@ -25,9 +25,6 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock>百竜スキル</TextBlock>
                 <ComboBox Width="150" ItemsSource="{Binding RampageSkills.Value, Mode=OneWay}" SelectedItem="{Binding SelectedRampageSkill1.Value}"/>
-                <ComboBox Width="150" ItemsSource="{Binding RampageSkills.Value, Mode=OneWay}" SelectedItem="{Binding SelectedRampageSkill2.Value}"/>
-                <ComboBox Width="150" ItemsSource="{Binding RampageSkills.Value, Mode=OneWay}" SelectedItem="{Binding SelectedRampageSkill3.Value}"/>
-                <CheckBox IsChecked="{Binding ShowAllRampage.Value}">全百竜スキル表示</CheckBox>
             </StackPanel>
 
             <Grid>
@@ -39,6 +36,14 @@
 
                 <StackPanel>
 
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">攻撃錬成</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding AttackAugLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">斬れ味錬成</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding SharpAugLv.Value}"/>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="90">匠</TextBlock>
                         <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding HandicraftLv.Value}"/>
@@ -102,6 +107,10 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">会心錬成</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding CritAugLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Width="90">見切り</TextBlock>
                         <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding CriticalEyeLv.Value}"/>
                     </StackPanel>
@@ -133,9 +142,45 @@
                         <TextBlock Width="90">挑戦者</TextBlock>
                         <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding AgitatorLv.Value}"/>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">狂竜症【蝕】</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding BloodlustLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">研磨術【鋭】</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding GrinderLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">業鎧【修羅】</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding MailOfHellfireLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">攻勢</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding ForayLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">巧撃</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding AdrenalineRushLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">災禍転福</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding CoalescenceLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">連撃</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding ChainCritLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">闇討ち</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding SneakAttackLv.Value}"/>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="2">
 
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">属性錬成</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding ElementAugLv.Value}"/>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="90">火属性攻撃強化</TextBlock>
                         <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding FireAttackLv.Value}"/>
@@ -179,6 +224,18 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="90">心眼</TextBlock>
                         <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding MindsEyeLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">弱点特効【属性】</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding ElementExploitLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">チャージマスター</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding ChargeMasterLv.Value}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">伏魔響命</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding DerelictionLv.Value}"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

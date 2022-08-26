@@ -8,12 +8,12 @@
         Title="RiseDamageSim" Height="900" Width="850">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="450"/>
+            <RowDefinition Height="470"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <TabControl Height="450">
+            <TabControl Height="470">
                 <TabItem Header="装備登録">
                     <subviews:EquipmentTabSubView DataContext="{Binding EquipmentTabSubVM.Value, Mode=OneWay}"/>
                 </TabItem>

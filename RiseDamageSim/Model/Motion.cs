@@ -22,6 +22,7 @@ namespace RiseDamageSim.Model
         public PhysicsElement PhysicsElement { get; set; }
         public double ElementModifier { get; set; } = 1.0;
         public bool IsSilkbind { get; set; } = false;
+        public int ChargeLevel { get; set; } = 0;
 
 
         public override string ToString()

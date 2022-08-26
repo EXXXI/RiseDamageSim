@@ -25,6 +25,26 @@ namespace RiseDamageSim.Model
         public string RampageSkill3 { get; set; }
 
         /// <summary>
+        /// 攻撃錬成
+        /// </summary>
+        public int AttackAugLv { get; set; }
+
+        /// <summary>
+        /// 斬れ味錬成
+        /// </summary>
+        public int SharpAugLv { get; set; }
+
+        /// <summary>
+        /// 会心錬成
+        /// </summary>
+        public int CritAugLv { get; set; }
+
+        /// <summary>
+        /// 属性錬成
+        /// </summary>
+        public int ElementAugLv { get; set; }
+
+        /// <summary>
         /// 匠
         /// </summary>
         public int HandicraftLv { get; set; }
@@ -193,5 +213,64 @@ namespace RiseDamageSim.Model
         /// しまき装備数(雷神龍の魂)
         /// </summary>
         public int IbushiLv { get; set; }
+
+        /// <summary>
+        /// 狂竜症【蝕】
+        /// </summary>
+        public int BloodlustLv { get; set; }
+
+        /// <summary>
+        /// 研磨術【鋭】
+        /// </summary>
+        public int GrinderLv { get; set; }
+
+        /// <summary>
+        /// 業鎧【修羅】
+        /// </summary>
+        public int MailOfHellfireLv { get; set; }
+
+        /// <summary>
+        /// 攻勢
+        /// </summary>
+        public int ForayLv { get; set; }
+
+        /// <summary>
+        /// 巧撃
+        /// </summary>
+        public int AdrenalineRushLv { get; set; }
+
+        /// <summary>
+        /// 災禍転福
+        /// </summary>
+        public int CoalescenceLv { get; set; }
+
+        /// <summary>
+        /// 弱点特効【属性】
+        /// </summary>
+        public int ElementExploitLv { get; set; }
+
+        /// <summary>
+        /// チャージマスター
+        /// </summary>
+        public int ChargeMasterLv { get; set; }
+
+        /// <summary>
+        /// 伏魔響命
+        /// </summary>
+        public int DerelictionLv { get; set; }
+
+        /// <summary>
+        /// 闇討ち
+        /// </summary>
+        public int SneakAttackLv { get; set; }
+
+        /// <summary>
+        /// 連撃
+        /// </summary>
+        public int ChainCritLv { get; set; }
+
+        
+
+
     }
 }

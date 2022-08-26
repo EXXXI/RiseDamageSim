@@ -80,6 +80,14 @@
                 <TextBox Width="25" Text="{Binding LampsquidProb.Value}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">狂竜感染</TextBlock>
+                <TextBox Width="25" Text="{Binding FrenzyInfectProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">狂竜克服</TextBlock>
+                <TextBox Width="25" Text="{Binding FrenzyTreatProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <TextBlock Width="100">強化咆哮</TextBlock>
                 <TextBox Width="25" Text="{Binding RousingRoarProb.Value}"/>
             </StackPanel>
@@ -151,11 +159,11 @@
                 <TextBox Width="25" Text="{Binding ChameleosSoulProb.Value}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Width="100">鋼龍の魂(1-4)</TextBlock>
+                <TextBlock Width="100">鋼龍の魂・連撃(1-4)</TextBlock>
                 <TextBox Width="25" Text="{Binding KushalaDaoraSoulProb.Value}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Width="100">鋼龍の魂(5)</TextBlock>
+                <TextBlock Width="100">鋼龍の魂・連撃(5)</TextBlock>
                 <TextBox Width="25" Text="{Binding KushalaDaoraSoul5Prob.Value}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -165,6 +173,30 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Width="100">攻めの守勢</TextBlock>
                 <TextBox Width="25" Text="{Binding OffensiveGuardProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">研磨術【鋭】</TextBlock>
+                <TextBox Width="25" Text="{Binding GrinderProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">巧撃</TextBlock>
+                <TextBox Width="25" Text="{Binding AdrenalineRushProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">災禍転福</TextBlock>
+                <TextBox Width="25" Text="{Binding CoalescenceProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">伏魔キュリア2以上</TextBlock>
+                <TextBox Width="25" Text="{Binding Dereliction2Prob.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">伏魔キュリア3</TextBlock>
+                <TextBox Width="25" Text="{Binding Dereliction3Prob.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">闇討ち</TextBlock>
+                <TextBox Width="25" Text="{Binding SneakAttackProb.Value}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="2">
@@ -189,6 +221,14 @@
                 <TextBlock Width="100">氷やられ</TextBlock>
                 <TextBox Width="25" Text="{Binding IceBlightProb.Value}"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">毒</TextBlock>
+                <TextBox Width="25" Text="{Binding PoisonProb.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">麻痺</TextBlock>
+                <TextBox Width="25" Text="{Binding ParalysisProb.Value}"/>
+            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="3">
             <TextBlock>行動設定</TextBlock>
@@ -199,6 +239,10 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Width="100">紅ヒトダマドリ上昇量</TextBlock>
                 <TextBox Width="25" Text="{Binding Spiribirds.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100">朱の書使用率</TextBlock>
+                <TextBox Width="25" Text="{Binding SwapRedProb.Value}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
