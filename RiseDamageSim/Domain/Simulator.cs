@@ -1130,6 +1130,8 @@ namespace RiseDamageSim.Domain
             List<DamagePattern> newDamages = damages;
             double count = Style.AttackCount;
 
+
+
             // 匠
             double handicraftAdditional = 0.0;
             if (equip.HandicraftLv > 0)
@@ -1143,6 +1145,8 @@ namespace RiseDamageSim.Domain
             {
                 augAdditional = equip.SharpAugLv * 10.0;
             }
+            // 固定・錬成ボーナス
+            augAdditional = 20.0;
 
             // 業物
             if (equip.RazorSharpLv > 0)
@@ -2674,6 +2678,22 @@ namespace RiseDamageSim.Domain
                     newDamage.WeaponAttack += add;
                 }
             }
+            // 錬成ボーナス
+            foreach (var newDamage in newDamages)
+            {
+                if (newDamage.ElementKind == Element.Fire ||
+                    newDamage.ElementKind == Element.Water ||
+                    newDamage.ElementKind == Element.Thunder ||
+                    newDamage.ElementKind == Element.Ice ||
+                    newDamage.ElementKind == Element.Dragon)
+                {
+                    newDamage.WeaponAttack += 25.0;
+                }
+                else
+                {
+                    newDamage.WeaponAttack += 40.0;
+                }
+            }
 
             // 攻撃力強化
             if (GetRanpageLv(equip, "攻撃力強化") > 0)
@@ -2734,6 +2754,18 @@ namespace RiseDamageSim.Domain
                     case 4:
                         add = 20;
                         break;
+                    case 5:
+                        add = 25;
+                        break;
+                    case 6:
+                        add = 33;
+                        break;
+                    case 7:
+                        add = 43;
+                        break;
+                    case 8:
+                        add = 55;
+                        break;
                     default:
                         break;
                 }
@@ -2743,6 +2775,19 @@ namespace RiseDamageSim.Domain
                     {
                         newDamage.ElementValue += add;
                     }
+                }
+            }
+
+            // 錬成ボーナス
+            foreach (var newDamage in newDamages)
+            {
+                if (newDamage.ElementKind == Element.Fire ||
+                    newDamage.ElementKind == Element.Water ||
+                    newDamage.ElementKind == Element.Thunder ||
+                    newDamage.ElementKind == Element.Ice ||
+                    newDamage.ElementKind == Element.Dragon)
+                {
+                    newDamage.ElementValue += 30.0;
                 }
             }
 
@@ -3296,6 +3341,56 @@ namespace RiseDamageSim.Domain
                                 break;
                             case 2:
                                 newDamage.PhysicsOtherModifier *= 1.1;
+                                break;
+                            case >= 3:
+                                newDamage.PhysicsOtherModifier *= 1.2;
+                                break;
+                            default:
+                                break;
+                        }
+                        newDamages.Add(newDamage);
+                    }
+                }
+            }
+
+            // 蓄積時攻撃強化
+            if (equip.BuildupBoostLv > 0)
+            {
+                oldDamages = newDamages;
+                newDamages = new();
+                foreach (var oldDamage in oldDamages)
+                {
+                    // 状態異常武器でない場合は効果なし
+                    if (oldDamage.ElementKind != Element.Poison &&
+                        oldDamage.ElementKind != Element.Paralysis &&
+                        oldDamage.ElementKind != Element.Sleep &&
+                        oldDamage.ElementKind != Element.Blast)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamages.Add(newDamage);
+                        continue;
+                    }
+
+                    double buildupBoostProb = 1.0 / 3.0;
+                    // 通常
+                    if (buildupBoostProb < 1)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * (1 - buildupBoostProb);
+                        newDamages.Add(newDamage);
+                    }
+                    // 蓄積時攻撃強化
+                    if (buildupBoostProb > 0)
+                    {
+                        DamagePattern newDamage = oldDamage.Clone();
+                        newDamage.Probability = oldDamage.Probability * buildupBoostProb;
+                        switch (equip.BuildupBoostLv)
+                        {
+                            case 1:
+                                newDamage.PhysicsOtherModifier *= 1.1;
+                                break;
+                            case 2:
+                                newDamage.PhysicsOtherModifier *= 1.15;
                                 break;
                             case >= 3:
                                 newDamage.PhysicsOtherModifier *= 1.2;

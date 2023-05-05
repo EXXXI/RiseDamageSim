@@ -269,7 +269,12 @@ namespace RiseDamageSim.Model
         /// </summary>
         public int ChainCritLv { get; set; }
 
-        
+        /// <summary>
+        /// 蓄積時攻撃強化
+        /// </summary>
+        public int BuildupBoostLv { get; set; }
+
+
 
 
     }

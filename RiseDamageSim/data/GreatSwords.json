@@ -644,6 +644,29 @@
         "RampageSlot": 2
     },
     {
+        "Name": "破邪之剣オオムラサキ",
+        "RampageSkills": [],
+        "Attack": 320,
+        "ElementKind": "Fire",
+        "ElementValue": 28,
+        "CriticalRate": 10,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 80,
+            "Orange": 80,
+            "Yellow": 80,
+            "Green": 10,
+            "Blue": 10,
+            "White": 30,
+            "Purple": 110,
+            "Max": 350
+        },
+        "Slot1": 2,
+        "Slot2": 2,
+        "Slot3": 2,
+        "RampageSlot": 1
+    },
+    {
         "Name": "メガスワスターⅠ",
         "RampageSkills": [],
         "Attack": 120,
@@ -1491,6 +1514,29 @@
         },
         "Slot1": 2,
         "Slot2": 0,
+        "Slot3": 0,
+        "RampageSlot": 1
+    },
+    {
+        "Name": "七星大剣【巨門】",
+        "RampageSkills": [],
+        "Attack": 340,
+        "ElementKind": "Poison",
+        "ElementValue": 20,
+        "CriticalRate": 0,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 50,
+            "Orange": 90,
+            "Yellow": 60,
+            "Green": 60,
+            "Blue": 60,
+            "White": 20,
+            "Purple": 60,
+            "Max": 350
+        },
+        "Slot1": 2,
+        "Slot2": 4,
         "Slot3": 0,
         "RampageSlot": 1
     },
@@ -3473,6 +3519,29 @@
         "RampageSlot": 2
     },
     {
+        "Name": "カクトスクラフト",
+        "RampageSkills": [],
+        "Attack": 310,
+        "ElementKind": "Fire",
+        "ElementValue": 65,
+        "CriticalRate": 15,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 70,
+            "Orange": 130,
+            "Yellow": 50,
+            "Green": 20,
+            "Blue": 20,
+            "White": 40,
+            "Purple": 70,
+            "Max": 350
+        },
+        "Slot1": 1,
+        "Slot2": 1,
+        "Slot3": 4,
+        "RampageSlot": 3
+    },
+    {
         "Name": "リームスクリンガⅠ",
         "RampageSkills": [],
         "Attack": 190,
@@ -3724,6 +3793,29 @@
         "Slot2": 0,
         "Slot3": 0,
         "RampageSlot": 3
+    },
+    {
+        "Name": "輝剣リオレウス",
+        "RampageSkills": [],
+        "Attack": 310,
+        "ElementKind": "Fire",
+        "ElementValue": 70,
+        "CriticalRate": 35,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 130,
+            "Orange": 30,
+            "Yellow": 30,
+            "Green": 50,
+            "Blue": 60,
+            "White": 80,
+            "Purple": 20,
+            "Max": 350
+        },
+        "Slot1": 3,
+        "Slot2": 0,
+        "Slot3": 0,
+        "RampageSlot": 2
     },
     {
         "Name": "クオーラルホーンⅠ",
@@ -4807,6 +4899,29 @@
         "RampageSlot": 1
     },
     {
+        "Name": "オリジンorエンド",
+        "RampageSkills": [],
+        "Attack": 340,
+        "ElementKind": "Dragon",
+        "ElementValue": 51,
+        "CriticalRate": 15,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 40,
+            "Orange": 30,
+            "Yellow": 80,
+            "Green": 60,
+            "Blue": 70,
+            "White": 90,
+            "Purple": 30,
+            "Max": 350
+        },
+        "Slot1": 1,
+        "Slot2": 3,
+        "Slot3": 0,
+        "RampageSlot": 2
+    },
+    {
         "Name": "鬼金棒Ⅰ",
         "RampageSkills": [],
         "Attack": 180,
@@ -5466,6 +5581,52 @@
             "Blue": 50,
             "White": 50,
             "Purple": 130,
+            "Max": 350
+        },
+        "Slot1": 0,
+        "Slot2": 0,
+        "Slot3": 0,
+        "RampageSlot": 3
+    },
+    {
+        "Name": "氷翼セラフィード",
+        "RampageSkills": [],
+        "Attack": 340,
+        "ElementKind": "Ice",
+        "ElementValue": 33,
+        "CriticalRate": 0,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 130,
+            "Orange": 30,
+            "Yellow": 30,
+            "Green": 60,
+            "Blue": 50,
+            "White": 30,
+            "Purple": 70,
+            "Max": 350
+        },
+        "Slot1": 4,
+        "Slot2": 0,
+        "Slot3": 0,
+        "RampageSlot": 3
+    },
+    {
+        "Name": "凶剣【叢雲】",
+        "RampageSkills": [],
+        "Attack": 360,
+        "ElementKind": "Water",
+        "ElementValue": 58,
+        "CriticalRate": -25,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 80,
+            "Orange": 40,
+            "Yellow": 30,
+            "Green": 30,
+            "Blue": 110,
+            "White": 50,
+            "Purple": 60,
             "Max": 350
         },
         "Slot1": 0,
@@ -6249,6 +6410,52 @@
             "White": 20,
             "Purple": 0,
             "Max": 250
+        },
+        "Slot1": 0,
+        "Slot2": 0,
+        "Slot3": 0,
+        "RampageSlot": 0
+    },
+    {
+        "Name": "ロストコード＝アスカ",
+        "RampageSkills": [],
+        "Attack": 0,
+        "ElementKind": "None",
+        "ElementValue": 0,
+        "CriticalRate": 0,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 50,
+            "Orange": 50,
+            "Yellow": 50,
+            "Green": 50,
+            "Blue": 50,
+            "White": 50,
+            "Purple": 100,
+            "Max": 350
+        },
+        "Slot1": 0,
+        "Slot2": 0,
+        "Slot3": 0,
+        "RampageSlot": 0
+    },
+    {
+        "Name": "ぬいぐるみレウス",
+        "RampageSkills": [],
+        "Attack": 0,
+        "ElementKind": "None",
+        "ElementValue": 0,
+        "CriticalRate": 0,
+        "Defence": 0,
+        "Sharpness": {
+            "Red": 50,
+            "Orange": 50,
+            "Yellow": 50,
+            "Green": 50,
+            "Blue": 50,
+            "White": 50,
+            "Purple": 100,
+            "Max": 350
         },
         "Slot1": 0,
         "Slot2": 0,

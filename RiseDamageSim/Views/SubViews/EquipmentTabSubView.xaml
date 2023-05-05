@@ -237,6 +237,10 @@
                         <TextBlock Width="90">伏魔響命</TextBlock>
                         <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding DerelictionLv.Value}"/>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="90">蓄積時攻撃強化</TextBlock>
+                        <ComboBox ItemsSource="{Binding SkillLvs.Value, Mode=OneWay}" SelectedItem="{Binding BuildupBoostLv.Value}"/>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </StackPanel>

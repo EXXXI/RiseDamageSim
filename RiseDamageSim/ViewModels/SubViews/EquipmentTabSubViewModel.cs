@@ -272,6 +272,11 @@ namespace RiseDamageSim.ViewModels.SubViews
         /// 連撃
         /// </summary>
         public ReactivePropertySlim<int> ChainCritLv { get; set; } = new(0);
+
+        /// <summary>
+        /// 蓄積時攻撃強化
+        /// </summary>
+        public ReactivePropertySlim<int> BuildupBoostLv { get; set; } = new(0);
         #endregion
 
         public ReactiveCommand AddEquipmentCommand { get; } = new ReactiveCommand();
@@ -285,7 +290,7 @@ namespace RiseDamageSim.ViewModels.SubViews
         {
             Weapons.Value = Masters.GreatSwords;
             SelectedWeapon.Value = Weapons.Value[0];
-            SkillLvs.Value = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7 };
+            SkillLvs.Value = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
             CompareSets.Value = Masters.CompareSets;
             SelectedSet.Value = CompareSets.Value[0];
 
@@ -394,6 +399,7 @@ namespace RiseDamageSim.ViewModels.SubViews
             equip.DerelictionLv = DerelictionLv.Value;
             equip.SneakAttackLv = SneakAttackLv.Value;
             equip.ChainCritLv = ChainCritLv.Value;
+            equip.BuildupBoostLv = BuildupBoostLv.Value;
 
             Masters.SaveCompareSets();
             ShowEquipments();
@@ -457,6 +463,7 @@ namespace RiseDamageSim.ViewModels.SubViews
             DerelictionLv.Value = equip.DerelictionLv;
             SneakAttackLv.Value = equip.SneakAttackLv;
             ChainCritLv.Value = equip.ChainCritLv;
+            BuildupBoostLv.Value = equip.BuildupBoostLv;
         }
 
         internal void DeleteEquipment(Equipment original)
